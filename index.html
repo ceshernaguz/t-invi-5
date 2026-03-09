@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Boda - Diana y César</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-polvo: #a3b1c6;
+            --dorado: #b8975d;
+            --texto-oscuro: #4a4a4a;
+            --fondo: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
+            display: flex;
+            justify-content: center;
+        }
+
+        .invitacion-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--fondo);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        /* Decoración Floral */
+        .floral {
+            position: absolute;
+            width: 200px;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        .top-left { top: -20px; left: -20px; transform: rotate(0deg); }
+        .bottom-right { bottom: -20px; right: -20px; transform: rotate(180deg); }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+
+        h2 { font-family: 'Great Vibes', cursive; color: var(--dorado); font-size: 2.5em; margin: 10px 0; }
+        .intro { font-size: 0.9em; margin-bottom: 20px; font-style: italic; }
+        
+        .padres {
+            display: flex;
+            justify-content: space-around;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85em;
+            margin: 20px 0;
+        }
+
+        .nombres-novios {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: var(--dorado);
+            margin: 20px 0;
+            line-height: 0.8;
+        }
+
+        .fecha-bloque {
+            border-top: 1px solid var(--azul-polvo);
+            border-bottom: 1px solid var(--azul-polvo);
+            display: inline-block;
+            padding: 10px 40px;
+            margin: 20px 0;
+        }
+        .fecha-bloque span { font-size: 1.2em; font-weight: 600; letter-spacing: 2px; }
+        .fecha-bloque .dia { font-size: 2.5em; margin: 0 15px; color: var(--texto-oscuro); }
+
+        /* Cuenta Regresiva */
+        #cuenta-regresiva {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .tiempo-unidad { font-size: 0.7em; text-transform: uppercase; }
+        .tiempo-valor { font-size: 1.5em; font-weight: bold; display: block; color: var(--azul-polvo); }
+
+        .info-evento { margin: 30px 0; font-size: 0.9em; }
+        .info-evento h3 { font-family: 'Playfair Display', serif; margin-bottom: 5px; color: var(--dorado); }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px 5px;
+            background-color: var(--azul-polvo);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.8em;
+            transition: 0.3s;
+        }
+        .btn-ws { background-color: #25d366; }
+        .btn-cal { background-color: var(--dorado); }
+        .btn:hover { opacity: 0.8; }
+
+        .dress-code {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 30px 20px;
+            border-radius: 10px;
+            border: 1px dashed var(--azul-polvo);
+        }
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .circle { width: 25px; height: 25px; border-radius: 50%; border: 1px solid #ddd; }
+
+    </style>
+</head>
+<body>
+
+<div class="invitacion-container">
+    <img src="https://www.transparentpng.com/download/watercolor-flower/blue-watercolor-flowers-png-transparent-17.png" class="floral top-left" alt="decor">
+    <img src="https://www.transparentpng.com/download/watercolor-flower/blue-watercolor-flowers-png-transparent-17.png" class="floral bottom-right" alt="decor">
+
+    <div class="content">
+        <h2>¡Nos casamos!</h2>
+        <p class="intro">Con la bendición de Dios y de nuestros padres.</p>
+
+        <div class="padres">
+            <div>David Huerta López<br>Leticia Sánchez Nava</div>
+            <div>Fernando Hernández<br>Magdalena Guzmán</div>
+        </div>
+
+        <p>Tenemos el honor de invitarte a nuestro matrimonio.</p>
+
+        <h1 class="nombres-novios">Diana Karen<br>&<br>César</h1>
+
+        <div class="fecha-bloque">
+            <span>SÁBADO</span>
+            <span class="dia">20</span>
+            <span>JUNIO 2026</span>
+        </div>
+
+        <div id="cuenta-regresiva">
+            <div><span id="dias" class="tiempo-valor">00</span><span class="tiempo-unidad">Días</span></div>
+            <div><span id="horas" class="tiempo-valor">00</span><span class="tiempo-unidad">Horas</span></div>
+            <div><span id="mins" class="tiempo-valor">00</span><span class="tiempo-unidad">Min</span></div>
+            <div><span id="secs" class="tiempo-valor">00</span><span class="tiempo-unidad">Seg</span></div>
+        </div>
+
+        <div class="info-evento">
+            <h3>3:30 PM Ceremonia</h3>
+            <p>Parroquia de Nuestra Señora de la Paz.<br>Río Amacuzac 23, Iztapalapa.</p>
+            <a href="https://maps.app.goo.gl/NcZNpuzXkpkpoZWp9" class="btn" target="_blank">Ver en Maps</a>
+        </div>
+
+        <div class="info-evento">
+            <h3>5:30 PM Recepción</h3>
+            <p>Salón La Forêt.<br>Calle Tamemes 78, Ejido del Moral, Iztapalapa.</p>
+            <a href="https://maps.app.goo.gl/ttmeEVdZeN2vPJaGA" class="btn" target="_blank">Ver en Maps</a>
+        </div>
+
+        <div class="dress-code">
+            <h3>Dress Code: Formal</h3>
+            <p>Favor de evitar blanco, azul bebé y colores similares.</p>
+            <p><small>Sugerimos optar por colores claros o tonos pastel.</small></p>
+            <div class="color-palette">
+                <div class="circle" style="background-color: #fdf2e9;"></div>
+                <div class="circle" style="background-color: #e8f8f5;"></div>
+                <div class="circle" style="background-color: #f5eef8;"></div>
+                <div class="circle" style="background-color: #fff9e6;"></div>
+            </div>
+        </div>
+
+        <div class="confirmacion">
+            <p>Conoce los detalles y confirma tu asistencia aquí:</p>
+            <a href="https://wa.me/525525066973?text=Hola%20Diana,%20confirmo%20mi%20asistencia" class="btn btn-ws" target="_blank">Confirmar con Novia</a>
+            <a href="https://wa.me/525539355484?text=Hola%20Cesar,%20confirmo%20mi%20asistencia" class="btn btn-ws" target="_blank">Confirmar con Novio</a>
+        </div>
+
+        <br>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Boda+Diana+y+Cesar&dates=20260620T153000/20260621T020000&details=Ceremonia+y+Recepcion&location=Iztapalapa,+CDMX" class="btn btn-cal" target="_blank">📅 Agregar al Calendario</a>
+    </div>
+</div>
+
+<script>
+    // Configuración de la cuenta regresiva
+    const weddingDate = new Date("June 20, 2026 15:30:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").innerHTML = days;
+        document.getElementById("horas").innerHTML = hours;
+        document.getElementById("mins").innerHTML = minutes;
+        document.getElementById("secs").innerHTML = seconds;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("cuenta-regresiva").innerHTML = "¡Hoy es el gran día!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>

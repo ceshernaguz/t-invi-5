@@ -1,162 +1,456 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación de Boda - Diana & César</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Invitación de Boda - Diana y César</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4a4a4a;
-            --accent-color: #d4af37; /* Tono dorado elegante */
-            --bg-color: #ffffff;
-            --text-muted: #777;
+            --azul-polvo: #a3b1c6;
+            --dorado: #b8975d;
+            --texto-oscuro: #4a4a4a;
+            --prohibido: #e74c3c;
+            --fondo: #ffffff;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f9f9f9;
-            color: var(--primary-color);
             margin: 0;
+            padding: 0;
+            background-color: #fdfdfd;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
 
-        .invitation-card {
-            background-color: var(--bg-color);
-            padding: 60px 40px;
+        .invitacion-container {
+            width: 100%;
             max-width: 500px;
-            width: 90%;
+            background-color: var(--fondo);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-            margin: 20px;
+            padding: 80px 0;
+            border: 1px solid #f0f0f0;
         }
 
-        .names-section {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8em;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* Margen Floral No Invasivo */
+        /* Imagen con tonos azules y rosas suaves, en acuarela */
+        .floral-border {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://img.freepik.com/free-vector/blue-pink-watercolor-flower-wreath-arrangement_65186-2580.jpg');
+            /* Imagen temporal, se reemplazará por una mejor si es necesario, pero intentaremos con mezcla manual o CSS */
+            /* En su lugar usaremos esquinas florales independientes para mayor control */
         }
 
-        .ampersand {
-            font-weight: 300;
+        /* Usaremos imágenes separadas para las esquinas, transparentes */
+        .flower-corner {
+            position: absolute;
+            width: 160px;
+            /* Tamaño un poco más grande ahora que rodearán la esquina */
+            z-index: 1;
+            opacity: 0.85;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        .top-left {
+            top: -15px;
+            left: -15px;
+            transform: rotate(-90deg);
+        }
+
+        .top-right {
+            top: -15px;
+            right: -15px;
+            transform: scaleX(-1) rotate(-90deg);
+        }
+
+        .bottom-left {
+            bottom: -15px;
+            left: -15px;
+            transform: scaleY(-1) rotate(-90deg);
+        }
+
+        .bottom-right {
+            bottom: -15px;
+            right: -15px;
+            transform: scale(-1) rotate(-90deg);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 0 40px;
+        }
+
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--dorado);
+            font-size: 2.5em;
+            margin: 10px 0 5px 0;
+        }
+
+        .intro {
+            font-size: 0.8em;
             font-style: italic;
-            color: var(--accent-color);
-            display: block;
-            margin: 15px 0;
+            margin-bottom: 25px;
+            color: #666;
         }
 
-        .parents-section {
-            margin: 40px 0;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .parents-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1em;
-            font-style: italic;
-            margin-bottom: 20px;
-            color: var(--text-muted);
-        }
-
-        .parents-list {
+        .padres {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85em;
+            margin: 20px 0 30px 0;
+            position: relative;
+        }
+
+        .padres-col {
+            padding: 0 15px;
+            line-height: 1.6;
+        }
+
+        .padres-divider {
+            width: 1px;
+            background-color: var(--dorado);
+            opacity: 0.5;
+            margin: 0 5px;
+        }
+
+        .mensaje-honor {
+            font-size: 0.9em;
+            margin: 30px 0;
+        }
+
+        .nombres-novios {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: var(--dorado);
+            margin: 10px 0;
+            line-height: 0.9;
+        }
+
+        .fecha-bloque {
+            border-top: 1px solid var(--azul-polvo);
+            border-bottom: 1px solid var(--azul-polvo);
+            display: inline-block;
+            padding: 10px 30px;
+            margin: 30px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .fecha-bloque .dia {
+            font-size: 3em;
+            font-weight: 300;
+            margin: 0 15px;
+            vertical-align: middle;
+            color: var(--texto-oscuro);
+        }
+
+        /* Cuenta Regresiva */
+        #timer {
+            display: flex;
+            justify-content: center;
             gap: 15px;
-            font-size: 0.95em;
+            margin: 30px 0;
+            color: var(--azul-polvo);
         }
 
-        .parents-couple {
-            font-weight: 400;
+        .t-box {
+            text-align: center;
+            width: 50px;
         }
 
-        .event-details {
-            margin: 40px 0;
-            font-size: 1.1em;
+        .t-box span {
+            display: block;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .t-box small {
+            font-size: 0.65em;
             letter-spacing: 1px;
         }
 
-        .date {
-            font-weight: 700;
-            display: block;
-            margin-bottom: 10px;
+        .info-evento {
+            margin: 35px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
         }
 
-        .album-section {
-            background-color: #fafafa;
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 50px;
-        }
-
-        .album-section h3 {
+        .info-evento .hora-titulo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-
-        .album-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--accent-color);
-            text-decoration: none;
             font-weight: 600;
-            border-bottom: 1px solid var(--accent-color);
-            transition: opacity 0.3s;
+            color: var(--texto-oscuro);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
         }
 
-        .album-link:hover {
-            opacity: 0.7;
+        /* Sección Solo Adultos */
+        .adultos-section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #fcfcfc;
+            border: 1px solid #f5f5f5;
+            border-radius: 8px;
         }
 
-        p {
-            line-height: 1.6;
-            color: var(--text-muted);
+        .adultos-section p {
+            font-size: 0.9em;
+            font-style: italic;
+            margin: 0 0 10px 0;
+            color: #666;
+        }
+
+        .adultos-section .bold-text {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: var(--dorado);
+            display: block;
+        }
+
+        /* Álbum Colaborativo */
+        .album-section {
+            background-color: #f9fbfc;
+            padding: 30px 20px;
+            margin: 40px 0;
+            border-radius: 10px;
+            border: 1px dashed rgba(163, 177, 198, 0.4);
+        }
+
+        .album-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: var(--azul-polvo);
+            margin: 0 0 10px 0;
+        }
+
+        /* Dress Code */
+        .dress-code {
+            margin: 40px 0;
+        }
+
+        .dress-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: var(--texto-oscuro);
+            margin-bottom: 5px;
+        }
+
+        .palette {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .color-x {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .color-x::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -20%;
+            width: 140%;
+            height: 2px;
+            background-color: var(--prohibido);
+            transform: rotate(-45deg);
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn-maps {
+            width: auto;
+            padding: 10px 25px;
+            border: 1px solid var(--azul-polvo);
+            color: var(--azul-polvo);
+            background-color: transparent;
+            margin-top: 15px;
+            border-radius: 20px;
+        }
+
+        .btn-ws {
+            background-color: #25d366;
+            color: white;
+            border-radius: 25px;
+        }
+
+        .btn-cal {
+            background-color: var(--dorado);
+            color: white;
+            margin-top: 30px;
+            border-radius: 25px;
+        }
+
+        .btn-album {
+            background-color: var(--azul-polvo);
+            color: white;
+            border-radius: 25px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .confirmacion-title {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            color: #666;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="invitation-card">
-        <div class="names-section">
-            Diana
-            <span class="ampersand">&</span>
-            César
-        </div>
+    <div class="invitacion-container">
+        <!-- Flores decorativas -->
+        <img src="flores.png" class="flower-corner top-left" alt="decor">
+        <img src="flores.png" class="flower-corner top-right" alt="decor">
+        <img src="flores.png" class="flower-corner bottom-left" alt="decor">
+        <img src="flores.png" class="flower-corner bottom-right" alt="decor">
 
-        <div class="parents-section">
-            <div class="parents-title">Con la bendición de nuestros padres</div>
-            <div class="parents-list">
-                <div class="parents-couple">
-                    [Nombre del Padre] & [Nombre de la Madre]
+        <div class="content">
+            <h2>¡Nos casamos!</h2>
+            <p class="intro">Con la bendición de Dios y de nuestros padres.</p>
+
+            <div class="padres">
+                <div class="padres-col">
+                    David Huerta López<br>Leticia Sánchez Nava
                 </div>
-                <div class="parents-couple">
-                    [Nombre del Padre] & [Nombre de la Madre]
+                <div class="padres-divider"></div>
+                <div class="padres-col">
+                    Fernando Hernández<br>Magdalena Guzmán
                 </div>
             </div>
-        </div>
 
-        <hr style="width: 50px; border: 0; border-top: 1px solid var(--accent-color); margin: 30px auto;">
+            <p class="mensaje-honor">Tenemos el honor de invitarte a nuestro matrimonio.</p>
 
-        <div class="event-details">
-            <span class="date">20 DE JUNIO DE 2026</span>
-            <span>[Ubicación del Evento]</span>
-        </div>
+            <h1 class="nombres-novios">Diana Karen<br>&<br>César</h1>
 
-        <div class="album-section">
-            <h3>Comparte tus Momentos</h3>
-            <p>Queremos revivir cada instante a través de tus ojos. Sube tus fotos y videos a nuestro álbum colaborativo:</p>
-            <a href="[Inserta_Link_Aqui]" class="album-link">Ver álbum de la boda</a>
+            <div class="fecha-bloque">
+                SÁBADO <span class="dia">20</span> JUNIO 2026
+            </div>
+
+            <div id="timer">
+                <div class="t-box"><span id="days">00</span><small>DÍAS</small></div>
+                <div class="t-box"><span id="hours">00</span><small>HR</small></div>
+                <div class="t-box"><span id="mins">00</span><small>MIN</small></div>
+                <div class="t-box"><span id="secs">00</span><small>SEG</small></div>
+            </div>
+
+            <div class="info-evento">
+                <span class="hora-titulo">3:30 PM Ceremonia</span>
+                Parroquia de Nuestra Señora de la Paz.<br>Río Amacuzac 23, Paseos de Churubusco, Iztapalapa, 09030.<br>
+                <a href="https://maps.app.goo.gl/NcZNpuzXkpkpoZWp9" class="btn btn-maps" target="_blank">Ver Mapa
+                    Iglesia</a>
+            </div>
+
+            <div class="info-evento">
+                <span class="hora-titulo">5:30 PM Recepción</span>
+                Salón La Forêt. Calle Tamemes 78, Col. <br>Ejido del Moral, Iztapalapa, 09040.<br>
+                <a href="https://maps.app.goo.gl/ttmeEVdZeN2vPJaGA" class="btn btn-maps" target="_blank">Ver Mapa
+                    Salón</a>
+            </div>
+
+            <div class="adultos-section">
+                <p>"Aunque amamos a sus pequeños, nuestra boda será solo para adultos."</p>
+                <span class="bold-text">Fiesta pensada para adultos</span>
+            </div>
+
+            <div class="album-section">
+                <h3 class="album-title">Captura y Comparte</h3>
+                <p style="font-size: 0.85em; color: #555;">Ayúdanos a guardar cada recuerdo subiendo tus fotos aquí:</p>
+                <a href="https://photos.app.goo.gl/FMdVAZdcKiu9isGF9" class="btn btn-album" target="_blank">Subir Fotos
+                    al Álbum</a>
+            </div>
+
+            <div class="dress-code">
+                <h3 class="dress-title">Dress Code: Formal</h3>
+                <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Favor de evitar blanco, azul bebé y tonos
+                    claros o pastel.</p>
+                <div class="palette">
+                    <!-- Colores prohibidos -->
+                    <div class="color-x" style="background-color: #ffffff;" title="Blanco"></div>
+                    <div class="color-x" style="background-color: #d1e9ff;" title="Azul bebé"></div>
+                    <div class="color-x" style="background-color: #fdf2e9;" title="Tono claro"></div>
+                    <div class="color-x" style="background-color: #f5eef8;" title="Tono pastel"></div>
+                </div>
+            </div>
+
+            <div class="confirmacion">
+                <p class="confirmacion-title">Conoce los detalles y confirma tu asistencia aquí:</p>
+                <a href="https://wa.me/525525066973?text=Hola%20Diana,%20confirmo%20mi%20asistencia" class="btn btn-ws"
+                    target="_blank">Confirmar con Diana</a>
+                <a href="https://wa.me/525539355484?text=Hola%20César,%20confirmo%20mi%20asistencia" class="btn btn-ws"
+                    target="_blank">Confirmar con César</a>
+            </div>
+
+            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Boda+Diana+y+César&dates=20260620T153000/20260621T020000&details=Ceremonia+y+Recepción&location=Iztapalapa,+CDMX"
+                class="btn btn-cal" target="_blank">📅 Guardar en Calendario</a>
         </div>
     </div>
 
+    <script>
+        // Cuenta regresiva
+        const weddingDate = new Date("June 20, 2026 15:30:00").getTime();
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("mins").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("secs").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            if (diff < 0) {
+                clearInterval(timer);
+                document.getElementById("timer").innerHTML = "<div style='font-size: 1.5em; font-weight: bold;'>¡Hoy es el gran día!</div>";
+            }
+        }, 1000);
+    </script>
+
 </body>
+
 </html>

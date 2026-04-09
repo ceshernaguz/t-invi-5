@@ -333,6 +333,80 @@
             margin-bottom: 20px;
             color: #666;
         }
+
+        /* ----- Botón Flotante de Música ----- */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: var(--fondo);
+            border: 2px solid var(--azul-polvo);
+            color: var(--azul-polvo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            outline: none;
+            padding: 0;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+            background-color: var(--azul-polvo);
+            color: white;
+            box-shadow: 0 6px 20px rgba(163, 177, 198, 0.4);
+        }
+
+        /* Estado "Reproduciendo" (dorado y efecto de pulso) */
+        .music-btn.playing {
+            animation: pulse-music 2.5s infinite;
+            background-color: var(--fondo);
+            border-color: var(--dorado);
+            color: var(--dorado);
+        }
+
+        .music-btn.playing:hover {
+            background-color: var(--dorado);
+            color: white;
+        }
+
+        @keyframes pulse-music {
+            0% { box-shadow: 0 0 0 0 rgba(184, 151, 93, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(184, 151, 93, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(184, 151, 93, 0); }
+        }
+
+        /* Centrar ícono de play (tiene un pequeño desfase visual naturalmente) */
+        .svg-play {
+            margin-left: 3px; 
+        }
+
+        .music-svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+            transition: all 0.3s;
+        }
+
+        /* Evitar que se solape con el indicador de scroll en móviles pequeños */
+        @media (max-width: 480px) {
+            .music-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 48px;
+                height: 48px;
+            }
+            .music-svg {
+                width: 22px;
+                height: 22px;
+            }
+        }
     </style>
 </head>
 
@@ -437,6 +511,22 @@
                 gusto celebrar contigo, no olvides confirmar tu asistencia</p>
         </div>
     </div>
+
+    <!-- Audio y Botón Flotante -->
+    <audio id="wedding-audio" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" class="music-btn" aria-label="Reproducir música de fondo">
+        <!-- Icono de Play (Música detenida) -->
+        <svg id="icon-play" class="music-svg svg-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+        <!-- Icono de Pausa (Música reproduciéndose) -->
+        <svg id="icon-pause" class="music-svg" style="display: none;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    </button>
 
     <!-- Indicadores de Scroll -->
     <div id="scroll-down-indicator" class="scroll-indicator">
@@ -587,6 +677,49 @@
                 }, 300);
             }
         });
+
+        // ----- Lógica de Música -----
+        const musicBtn = document.getElementById('music-btn');
+        const weddingAudio = document.getElementById('wedding-audio');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        let isPlaying = false;
+
+        // Volumen suave para que sea música de fondo
+        weddingAudio.volume = 0.5;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                // Pausar
+                weddingAudio.pause();
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                musicBtn.classList.remove('playing');
+            } else {
+                // Reproducir
+                weddingAudio.play().then(() => {
+                    iconPlay.style.display = 'none';
+                    iconPause.style.display = 'block';
+                    musicBtn.classList.add('playing');
+                }).catch(error => {
+                    console.log("Navegador previno el autoplay:", error);
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Alternar al hacer clic en el botón
+        musicBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar que burbujee al body
+            toggleMusic();
+        });
+
+        // Auto-reproducir al primer toque/clic en cualquier parte de la pantalla
+        document.body.addEventListener('click', function() {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }, { once: true }); // Se ejecuta una sola vez
     </script>
 
 </body>
